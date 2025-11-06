@@ -4,36 +4,47 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 
+type Event = {
+  time: string;
+  title: string;
+  speaker: string;
+};
+
+type Schedule = {
+  title: string;
+  events: Event[];
+};
+
+const scheduleData: Record<24 | 25, Schedule> = {
+  24: {
+    title: "Conferencia de Ingeniería de Software y Ciencia de la Computación",
+    events: [
+      { time: "9:00 am - 9:30 am", title: "Registro de asistencias", speaker: "" },
+      { time: "9:30 am - 10:00 am", title: "Apertura de actividades por aniversario de EPISI", speaker: "" },
+      { time: "10:00 am - 10:40 am", title: "Ponencia 1", speaker: "Dr. Americo de Celis Vidal" },
+      { time: "10:40 am - 11:20 am", title: "Ponencia 2", speaker: "Dr. Anibal Flores Garcia" },
+      { time: "11:20 am - 11:40 am", title: "Coffee Break", speaker: "" },
+      { time: "11:40 am - 12:20 pm", title: "Ponencia 3", speaker: "Dr. Saul Huaquipaco Encinas" },
+      { time: "12:20 pm - 1:00 pm", title: "Ponencia 4", speaker: "MSc. Yessica Rosas Cuevas" },
+      { time: "1:00 pm", title: "ALMUERZO", speaker: "" },
+    ],
+  },
+  25: {
+    title: "Coloquio de egresados de la Escuela Profesional de Ingeniería de Sistemas e Informática",
+    events: [
+      { time: "3:00 pm - 3:40 pm", title: "Ponencia 1", speaker: "Mariela M. Nina Capujra" },
+      { time: "3:40 pm - 4:10 pm", title: "Ponencia 2", speaker: "Allison I. Reynoso Serra" },
+      { time: "4:10 pm - 4:30 pm", title: "Coffee Break", speaker: "" },
+      { time: "4:30 pm - 5:10 pm", title: "Ponencia 3", speaker: "Luis Torres Carpio" },
+      { time: "5:10 pm - 5:50 pm", title: "Ponencia 4", speaker: "Giordhano Valdez Linares" },
+    ],
+  },
+};
+
 export default function Schedule() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const [activeDay, setActiveDay] = useState(24);
-
-  const scheduleData = {
-    24: {
-      title: "Conferencia de Ingeniería de Software y Ciencia de la Computación",
-      events: [
-        { time: "9:00 am - 9:30 am", title: "Registro de asistencias", speaker: "" },
-        { time: "9:30 am - 10:00 am", title: "Apertura de actividades por aniversario de EPISI", speaker: "" },
-        { time: "10:00 am - 10:40 am", title: "Ponencia 1", speaker: "Dr. Americo de Celis Vidal" },
-        { time: "10:40 am - 11:20 am", title: "Ponencia 2", speaker: "Dr. Anibal Flores Garcia" },
-        { time: "11:20 am - 11:40 am", title: "Coffee Break", speaker: "" },
-        { time: "11:40 am - 12:20 pm", title: "Ponencia 3", speaker: "Dr. Saul Huaquipaco Encinas" },
-        { time: "12:20 pm - 1:00 pm", title: "Ponencia 4", speaker: "MSc. Yessica Rosas Cuevas" },
-        { time: "1:00 pm", title: "ALMUERZO", speaker: "" },
-      ],
-    },
-    25: {
-      title: "Coloquio de egresados de Escuela Profesional de ingeniería de Sistemas e Informatica",
-      events: [
-        { time: "3:00 pm - 3:40 pm", title: "Ponencia 1", speaker: "Mariela M. Nina Capujra" },
-        { time: "3:40 pm - 4:10 pm", title: "Ponencia 2", speaker: "Allison I. Reynoso Serra" },
-        { time: "4:10 pm - 4:30 pm", title: "Coffee Break", speaker: "" },
-        { time: "4:30 pm - 5:10 pm", title: "Ponencia 3", speaker: "Luis Torres Carpio" },
-        { time: "5:10 pm - 5:50 pm", title: "Ponencia 4", speaker: "Giordhano Valdez Linares" },
-      ],
-    },
-  };
+  const [activeDay, setActiveDay] = useState<24 | 25>(24); // 👈 tipado correcto
 
   return (
     <section
@@ -53,7 +64,7 @@ export default function Schedule() {
               Agenda del Evento
             </span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto" style={{ textAlign: 'center' }}>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto" style={{ textAlign: "center" }}>
             {scheduleData[activeDay].title}
           </p>
         </motion.div>
@@ -82,7 +93,10 @@ export default function Schedule() {
         </motion.div>
 
         <div className="max-w-3xl mx-auto relative">
-          <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-px bg-white/10" aria-hidden="true" />
+          <div
+            className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-px bg-white/10"
+            aria-hidden="true"
+          />
 
           {scheduleData[activeDay].events.map((item, index) => (
             <motion.div
@@ -90,7 +104,7 @@ export default function Schedule() {
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
               transition={{ duration: 0.5, delay: index * 0.07 }}
-              className={`relative flex flex-col md:flex-row items-center mb-8 md:mb-10`}
+              className="relative flex flex-col md:flex-row items-center mb-8 md:mb-10"
             >
               <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-cyan-400 shadow-[0_0_0_6px_rgba(34,211,238,0.2)]" />
 
