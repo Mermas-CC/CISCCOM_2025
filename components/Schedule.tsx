@@ -75,21 +75,22 @@ export default function Schedule() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex justify-center gap-4 mb-12"
         >
-          {[24, 25].map((day) => (
-            <motion.button
-              key={day}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveDay(day)}
-              className={`px-8 py-3 rounded-full font-semibold transition-all ${
-                activeDay === day
-                  ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/30"
-                  : "bg-white/10 text-gray-400 hover:bg-white/20"
-              }`}
-            >
-              {day} de Noviembre
-            </motion.button>
-          ))}
+          {([24, 25] as const).map((day) => (
+  <motion.button
+    key={day}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    onClick={() => setActiveDay(day)}
+    className={`px-8 py-3 rounded-full font-semibold transition-all ${
+      activeDay === day
+        ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-cyan-500/30"
+        : "bg-white/10 text-gray-400 hover:bg-white/20"
+    }`}
+  >
+    {day} de Noviembre
+  </motion.button>
+))}
+
         </motion.div>
 
         <div className="max-w-3xl mx-auto relative">
