@@ -7,27 +7,31 @@ import { useRef } from "react";
 export default function Alumni() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+const alumni = [
+  {
+    name: "Mariela M. Nina Capujra",
+    role: "Estudiante de Maestría en Ciencia de la Computación — UNIFESP, Brasil",
+    description:
+      "Tema: De Moquegua a São Paulo: mi viaje académico en la ciencia de la computación. Ingeniera de Sistemas por la UNAM (Perú), apasionada por la IA, el Machine Learning y el PLN. Especializada en traducción automática y desarrollo de chatbots. Becaria CAPES y activa en investigación de IA.",
+    image: "/speakers/mariela.jpg",
+  },
+  {
+    name: "Allison I. Reynoso Serra",
+    role: "CDO de AiMara Lab",
+  
+    description:
+      "Tema: Recuperación de datos Peruanos para entrenamiento de LATAM GPT. Ganadora del Nasa Space Apps Challenge y becaria de Oracle Next Education y Aspire Leaders Program de Harvard University. Investigadora en Procesamiento del Lenguaje Natural y Visión por Computador.",
+    image: "/speakers/allison.jpg",
+  },
+  {
+    name: "Elmer Collanqui Casapia",
+    role: "CTO de AiMara Lab",
+    description:
+      "Tema: Por confirmar. Becario en programas nacionales e internacionales, desarrollador de software e inteligencia artificial, e investigador en NLP e IA generativa. Enfocado en proyectos de innovación tecnológica y estudio avanzado de técnicas de IA.",
+    image: "/speakers/elmer.jpg",
+  },
+];
 
-  const alumni = [
-    {
-      name: "Mariela Nina",
-      role: "Software Engineer at Google",
-      description: "Egresada destacada, ahora construyendo el futuro de la búsqueda en Google.",
-      image: "/speakers/saul.jpeg",
-    },
-    {
-      name: "Allison Reynoso",
-      role: "Product Manager at Microsoft",
-      description: "Liderando la próxima generación de productos de productividad en Microsoft.",
-      image: "/speakers/yessica.jpeg",
-    },
-    {
-      name: "Elmer Collanqui",
-      role: "AI Researcher at OpenAI",
-      description: "Investigando y desarrollando modelos de inteligencia artificial de vanguardia.",
-      image: "/speakers/anibal.jpeg",
-    },
-  ];
 
   return (
     <section
